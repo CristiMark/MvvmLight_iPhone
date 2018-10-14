@@ -40,11 +40,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="1635" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" textAlignment="natural" placeholder="Enter the PoneWord">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="1635" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" textAlignment="natural" placeholder="Enter the Phone Number">
                                 <rect key="frame" x="16" y="136" width="382" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" colorSpace="calibratedRGB" red="0" green="0" blue="0" alpha="1"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="tel" keyboardType="phonePad"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1636" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
