@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using CoreGraphics;
 using Foundation;
 using GalaSoft.MvvmLight.Helpers;
+using Google.Maps;
 using MvvmLight_iPhone.ViewModel;
 using UIKit;
 
@@ -12,10 +14,12 @@ namespace MvvmLight_iPhone
 		// Keep track of bindings to avoid premature garbage collection
 		private readonly List<Binding> _bindings = new List<Binding>();
 
-		/// <summary>
-		/// Gets a reference to the MainViewModel from the ViewModelLocator.
-		/// </summary>
-		private MainViewModel Vm
+        MapView mapView;
+
+        /// <summary>
+        /// Gets a reference to the MainViewModel from the ViewModelLocator.
+        /// </summary>
+        private MainViewModel Vm
 		{
 			get
 			{
@@ -62,69 +66,75 @@ namespace MvvmLight_iPhone
 				}
 
 			};
-		   
 
 
-			// Dismiss the keyboard
-			//DialogNavText.ShouldReturn += t =>
-			//{
-			//    t.ResignFirstResponder();
-			//    return true;
-			//};
+            var camera = CameraPosition.FromCamera(latitude: 37.79,
+                                            longitude: -122.40,
+                                            zoom: 6);
+            mapView = MapView.FromCamera(CGRect.Empty, camera);
+            mapView.MyLocationEnabled = true;
+            View = mapView;
 
-			//// Binding and commanding
+            // Dismiss the keyboard
+            //DialogNavText.ShouldReturn += t =>
+            //{
+            //    t.ResignFirstResponder();
+            //    return true;
+            //};
 
-			//// Binding between the first UILabel and the WelcomeTitle property on the VM.
-			//// Keep track of the binding to avoid premature garbage collection
-			//_bindings.Add(
-			//    this.SetBinding(
-			//        () => Vm.WelcomeTitle,
-			//        () => WelcomeText.Text));
+            //// Binding and commanding
 
-			//// Actuate the IncrementCommand on the VM.
-			//IncrementButton.SetCommand(
-			//    "TouchUpInside",
-			//    Vm.IncrementCommand);
+            //// Binding between the first UILabel and the WelcomeTitle property on the VM.
+            //// Keep track of the binding to avoid premature garbage collection
+            //_bindings.Add(
+            //    this.SetBinding(
+            //        () => Vm.WelcomeTitle,
+            //        () => WelcomeText.Text));
 
-			//// Create a binding that fires every time that the EditingChanged event is called
-			//var dialogNavBinding = this.SetBinding(
-			//    () => DialogNavText.Text)
-			//    .UpdateSourceTrigger("EditingChanged");
+            //// Actuate the IncrementCommand on the VM.
+            //IncrementButton.SetCommand(
+            //    "TouchUpInside",
+            //    Vm.IncrementCommand);
 
-			//// Keep track of the binding to avoid premature garbage collection
-			//_bindings.Add(dialogNavBinding);
+            //// Create a binding that fires every time that the EditingChanged event is called
+            //var dialogNavBinding = this.SetBinding(
+            //    () => DialogNavText.Text)
+            //    .UpdateSourceTrigger("EditingChanged");
 
-			//// Actuate the NavigateCommand on the VM.
-			//// This command needs a CommandParameter of type string.
-			//// This is what the dialogNavBinding provides.
-			//NavigateButton.SetCommand(
-			//    "TouchUpInside",
-			//    Vm.NavigateCommand,
-			//    dialogNavBinding);
+            //// Keep track of the binding to avoid premature garbage collection
+            //_bindings.Add(dialogNavBinding);
 
-			//// Actuate the ShowDialogCommand on the VM.
-			//// This command needs a CommandParameter of type string.
-			//// This is what the dialogNavBinding provides.
-			//// This button will be disabled when the content of DialogNavText
-			//// is empty (see ShowDialogCommand on the MainViewModel class).
-			//ShowDialogButton.SetCommand(
-			//    "TouchUpInside",
-			//    Vm.ShowDialogCommand,
-			//    dialogNavBinding);
+            //// Actuate the NavigateCommand on the VM.
+            //// This command needs a CommandParameter of type string.
+            //// This is what the dialogNavBinding provides.
+            //NavigateButton.SetCommand(
+            //    "TouchUpInside",
+            //    Vm.NavigateCommand,
+            //    dialogNavBinding);
 
-			//// Create a binding between the Clock property of the VM
-			//// and the ClockText UILabel.
-			//// Keep track of the binding to avoid premature garbage collection
-			//_bindings.Add(
-			//    this.SetBinding(
-			//        () => Vm.Clock,
-			//        () => ClockText.Text));
+            //// Actuate the ShowDialogCommand on the VM.
+            //// This command needs a CommandParameter of type string.
+            //// This is what the dialogNavBinding provides.
+            //// This button will be disabled when the content of DialogNavText
+            //// is empty (see ShowDialogCommand on the MainViewModel class).
+            //ShowDialogButton.SetCommand(
+            //    "TouchUpInside",
+            //    Vm.ShowDialogCommand,
+            //    dialogNavBinding);
 
-			//// Actuate the SendMessageCommand on the VM.
-			//SendMessageButton.SetCommand(
-			//    "TouchUpInside",
-			//    Vm.SendMessageCommand);
-		}
+            //// Create a binding between the Clock property of the VM
+            //// and the ClockText UILabel.
+            //// Keep track of the binding to avoid premature garbage collection
+            //_bindings.Add(
+            //    this.SetBinding(
+            //        () => Vm.Clock,
+            //        () => ClockText.Text));
+
+            //// Actuate the SendMessageCommand on the VM.
+            //SendMessageButton.SetCommand(
+            //    "TouchUpInside",
+            //    Vm.SendMessageCommand);
+        }
 
 		public override void ViewDidAppear(bool animated)
 		{
@@ -141,5 +151,7 @@ namespace MvvmLight_iPhone
 			// Stop the clock background thread on the MainViewModel.
 			Vm.StopClock();
 		}
-	}
+
+      
+    }
 }

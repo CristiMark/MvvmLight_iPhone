@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using GalaSoft.MvvmLight.Views;
+using Google.Maps;
 using MvvmLight_iPhone.ViewModel;
 using UIKit;
 
@@ -26,8 +27,11 @@ namespace MvvmLight_iPhone
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
+
+        const string MapsApiKey = "AIzaSyAlWtaoBaP3gvxIHd6ju_Xd9agMRin4fZ4";
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            MapServices.ProvideAPIKey(MapsApiKey);
             // MVVM Light's DispatcherHelper for cross-thread handling.
             DispatcherHelper.Initialize(app);
 
